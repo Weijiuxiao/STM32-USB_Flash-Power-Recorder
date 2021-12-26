@@ -78,50 +78,57 @@ extern _lcd_dev lcddev;	//管理LCD重要参数
 //#define LCD_W 240		//TFT 1.3
 //#define LCD_H 240
 
-//#define LCD_W 135		//TFT 1.14
-//#define LCD_H 240
+#define LCD_W 135		//TFT 1.14
+#define LCD_H 240
 
-#define LCD_W 80		//TFT 0.96
-#define LCD_H 160
+//#define LCD_W 80		//TFT 0.96
+//#define LCD_H 160
 
 //TFTLCD部分外要调用的函数		   
 extern u16  POINT_COLOR;//默认红色    
 extern u16  BACK_COLOR; //背景颜色.默认为白色
 
 ////////////////////////////////////////////////////////////////////
-//-----------------LCD端口定义---------------- 
-#define GPIO_TYPE  GPIOB  //GPIO组类型
-#define LED      6        //背光控制引脚       PB6
-#define LCD_CS   9       //片选引脚            PB9
-#define LCD_RS   7       //寄存器/数据选择引脚 PB7 
-#define LCD_RST  8       //复位引脚            PB8
+//-----------------示例教程LCD端口定义---------------- 
+//#define GPIO_TYPE  GPIOB  //GPIO组类型
+//#define LED      6        //背光控制引脚       PB6
+//#define LCD_CS   9       //片选引脚            PB9
+//#define LCD_RS   7       //寄存器/数据选择引脚 PB7 
+//#define LCD_RST  8       //复位引脚            PB8
+
+//------------Flash Power Recorder LCD端口定义----------- 
+//#define GPIO_TYPE  GPIOB  //GPIO组类型
+//#define LED      A15        //背光控制引脚       PB6
+//#define LCD_CS   B7       //片选引脚            PB9
+//#define LCD_RS   B6       //寄存器/数据选择引脚 PB7 
+//#define LCD_RST  B4       //复位引脚            PB8
 
 
 //QDtech全系列模块采用了三极管控制背光亮灭，用户也可以接PWM调节背光亮度
-#define	LCD_LED_On  HAL_GPIO_WritePin(IPS_BLK_GPIO_Port,IPS_BLK_Pin,GPIO_PIN_SET)//LCD背光    		 PB6
+#define	LCD_LED_On  HAL_GPIO_WritePin(TFT_SW_GPIO_Port,TFT_SW_Pin,GPIO_PIN_SET)//LCD背光    		 PB6
 //#define	LCD_LED PBout(LED) //LCD背光    		 PB6
 //如果使用官方库函数定义下列底层，速度将会下降到14帧每秒，建议采用我司推荐方法
 //以下IO定义直接操作寄存器，快速IO操作，刷屏速率可以达到28帧每秒！ 
 
-//GPIO置位（拉高）
-#define	LCD_CS_SET  GPIO_TYPE->BSRR=1<<LCD_CS    //片选端口  	
-#define	LCD_RS_SET	GPIO_TYPE->BSRR=1<<LCD_RS    //数据/命令  	  
-#define	LCD_RST_SET	GPIO_TYPE->BSRR=1<<LCD_RST   //复位			  
-
-//GPIO复位（拉低）							    
-#define	LCD_CS_CLR  GPIO_TYPE->BRR=1<<LCD_CS     //片选端口  	
-#define	LCD_RS_CLR	GPIO_TYPE->BRR=1<<LCD_RS     //数据/命令  	 
-#define	LCD_RST_CLR	GPIO_TYPE->BRR=1<<LCD_RST    //复位		
-
 ////GPIO置位（拉高）
-//#define	LCD_CS_SET  HAL_GPIO_WritePin(IPS_CS_GPIO_Port,IPS_CS_Pin,GPIO_PIN_SET)   //片选端口  	
-//#define	LCD_RS_SET	HAL_GPIO_WritePin(IPS_DC_GPIO_Port,IPS_DC_Pin,GPIO_PIN_SET)    //数据/命令  	  
-//#define	LCD_RST_SET	HAL_GPIO_WritePin(IPS_RES_GPIO_Port,IPS_RES_Pin,GPIO_PIN_SET)   //复位			  
+//#define	LCD_CS_SET  GPIO_TYPE->BSRR=1<<LCD_CS    //片选端口  	
+//#define	LCD_RS_SET	GPIO_TYPE->BSRR=1<<LCD_RS    //数据/命令  	  
+//#define	LCD_RST_SET	GPIO_TYPE->BSRR=1<<LCD_RST   //复位			  
 
 ////GPIO复位（拉低）							    
-//#define	LCD_CS_CLR  HAL_GPIO_WritePin(IPS_CS_GPIO_Port,IPS_CS_Pin,GPIO_PIN_RESET)     //片选端口  	
-//#define	LCD_RS_CLR	HAL_GPIO_WritePin(IPS_DC_GPIO_Port,IPS_DC_Pin,GPIO_PIN_RESET)     //数据/命令  	 
-//#define	LCD_RST_CLR	HAL_GPIO_WritePin(IPS_RES_GPIO_Port,IPS_RES_Pin,GPIO_PIN_RESET)    //复位	
+//#define	LCD_CS_CLR  GPIO_TYPE->BRR=1<<LCD_CS     //片选端口  	
+//#define	LCD_RS_CLR	GPIO_TYPE->BRR=1<<LCD_RS     //数据/命令  	 
+//#define	LCD_RST_CLR	GPIO_TYPE->BRR=1<<LCD_RST    //复位		
+
+//GPIO置位（拉高）
+#define	LCD_CS_SET  HAL_GPIO_WritePin(TFT_CS_GPIO_Port,TFT_CS_Pin,GPIO_PIN_SET)   //片选端口  	
+#define	LCD_RS_SET	HAL_GPIO_WritePin(TFT_RS_GPIO_Port,TFT_RS_Pin,GPIO_PIN_SET)    //数据/命令  	  
+#define	LCD_RST_SET	HAL_GPIO_WritePin(TFT_RES_GPIO_Port,TFT_RES_Pin,GPIO_PIN_SET)   //复位			  
+
+//GPIO复位（拉低）							    
+#define	LCD_CS_CLR  HAL_GPIO_WritePin(TFT_CS_GPIO_Port,TFT_CS_Pin,GPIO_PIN_RESET)     //片选端口  	
+#define	LCD_RS_CLR	HAL_GPIO_WritePin(TFT_RS_GPIO_Port,TFT_RS_Pin,GPIO_PIN_RESET)     //数据/命令  	 
+#define	LCD_RST_CLR	HAL_GPIO_WritePin(TFT_RES_GPIO_Port,TFT_RES_Pin,GPIO_PIN_RESET)    //复位	
 
 //画笔颜色
 #define WHITE       0xFFFF

@@ -27,7 +27,9 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "lcd.h"
+#include "gui.h"
+#include "test.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -96,13 +98,23 @@ int main(void)
   MX_SPI2_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-
+	LCD_Init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	main_test(); 		//测试主界面
+	menu_test();     //3D菜单显示测试
+	Test_Color();  		//简单刷屏填充测试
+	Test_FillRec();		//GUI矩形绘图测试
+	Test_Circle(); 		//GUI画圆测试
+//	Test_Triangle();    //GUI三角形绘图测试
+//	English_Font_test();//英文字体示例测试
+//	Chinese_Font_test();//中文字体示例测试
+	Pic_test();			//图片显示示例测试
+//	Rotate_Test();   //旋转显示测试
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
