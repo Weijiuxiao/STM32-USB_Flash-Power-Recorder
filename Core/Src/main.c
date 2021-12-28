@@ -30,6 +30,7 @@
 #include "lcd.h"
 #include "gui.h"
 #include "test.h"
+//#include "Power_SW.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -39,6 +40,11 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define debug 0
+
+#define PWR_On HAL_GPIO_WritePin(PWR_EN_GPIO_Port,PWR_EN_Pin,GPIO_PIN_SET)
+
+#define PWR_Off HAL_GPIO_WritePin(PWR_EN_GPIO_Port,PWR_EN_Pin,GPIO_PIN_RESET)
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -70,7 +76,7 @@ void SystemClock_Config(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
+	uint16_t t;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -98,6 +104,15 @@ int main(void)
   MX_SPI2_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
+//  if(HAL_GPIO_ReadPin(Key_down_GPIO_Port,Key_down_Pin) == GPIO_PIN_RESET)
+//  {
+//	  HAL_Delay(10);
+//	  if(HAL_GPIO_ReadPin(Key_down_GPIO_Port,Key_down_Pin) == GPIO_PIN_RESET)
+//	  {
+		  HAL_Delay(2500);
+		  PWR_On;
+//	  }
+//  }
 	LCD_Init();
   /* USER CODE END 2 */
 
@@ -105,16 +120,43 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	main_test(); 		//测试主界面
-	menu_test();     //3D菜单显示测试
-	Test_Color();  		//简单刷屏填充测试
-	Test_FillRec();		//GUI矩形绘图测试
-	Test_Circle(); 		//GUI画圆测试
-//	Test_Triangle();    //GUI三角形绘图测试
-//	English_Font_test();//英文字体示例测试
-//	Chinese_Font_test();//中文字体示例测试
-	Pic_test();			//图片显示示例测试
-//	Rotate_Test();   //旋转显示测试
+		main_test(); 		//测试主界面
+		menu_test();     //3D菜单显示测试
+		
+	#if debug
+	LCD_LED_Off;
+	#endif
+	  
+		Test_Color();  		//简单刷屏填充测试
+	  
+	#if debug
+	LCD_LED_On;
+	#endif
+	  
+		Test_FillRec();		//GUI矩形绘图测试
+	  
+	#if debug
+	LCD_LED_On;
+	#endif
+		//	Test_Triangle();    //GUI三角形绘图测试
+		//	English_Font_test();//英文字体示例测试
+		//	Chinese_Font_test();//中文字体示例测试
+		Pic_test();			//图片显示示例测试
+		//	Rotate_Test();   //旋转显示测试
+		
+//		LCD_LED_Off;
+//		HAL_Delay(1000);
+//		LCD_LED_On;
+//		HAL_Delay(1000);
+//	  if(HAL_GPIO_ReadPin(Key_down_GPIO_Port,Key_down_Pin) == GPIO_PIN_RESET)
+//	  {
+//		  t ++;
+//		  if(t == 2)
+//		  {
+//			  t = 0;
+			  PWR_Off;
+//		  }
+//	  }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

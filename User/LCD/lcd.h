@@ -106,6 +106,7 @@ extern u16  BACK_COLOR; //背景颜色.默认为白色
 
 //QDtech全系列模块采用了三极管控制背光亮灭，用户也可以接PWM调节背光亮度
 #define	LCD_LED_On  HAL_GPIO_WritePin(TFT_SW_GPIO_Port,TFT_SW_Pin,GPIO_PIN_SET)//LCD背光    		 PB6
+#define	LCD_LED_Off  HAL_GPIO_WritePin(TFT_SW_GPIO_Port,TFT_SW_Pin,GPIO_PIN_RESET)//LCD背光
 //#define	LCD_LED PBout(LED) //LCD背光    		 PB6
 //如果使用官方库函数定义下列底层，速度将会下降到14帧每秒，建议采用我司推荐方法
 //以下IO定义直接操作寄存器，快速IO操作，刷屏速率可以达到28帧每秒！ 

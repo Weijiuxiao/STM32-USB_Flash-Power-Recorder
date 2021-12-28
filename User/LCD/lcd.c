@@ -310,6 +310,7 @@ void LCD_Init(void)
 	LCD_WR_REG(0x29); 	
   LCD_direction(USE_HORIZONTAL);//设置LCD显示方向
 	LCD_LED_On;//点亮背光
+//	LCD_CS_CLR;//  add
 	LCD_Clear(BLACK);//清全屏白色
 }
  
